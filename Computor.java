@@ -1,11 +1,13 @@
+import javax.lang.model.util.ElementScanner6;
+
 public class Computor {
     private float a;
     private float b;
     private float c;
     private int hpd;
     private String [] sumSplit;
-    private float sol1;
-    private float sol2;
+    private String solution1;
+    private String solution2;
     private boolean discriminant;
 
     public Computor (String sum){
@@ -44,17 +46,24 @@ public class Computor {
     }
 
     public void solve(){
-        sol1 = sol2 = 0;
-        if (a != 0 ){
+        float real, imag;
+        real = imag = 0;
+        if (a != 0){
             float sq = (b*b) - 4*a*c;
             System.out.println(sq);
             discriminant = (sq < 0) ? false : true;
             if (discriminant == true){
-                sol1 = (-b + Sqrt(sq))/ (2 * a);
-                sol2 = (-b - Sqrt(sq))/ (2 * a);
+                solution1 = "X = " + String.valueOf((-b + Sqrt(sq))/ (2 * a));
+                solution2 = "X = " + String.valueOf((-b - Sqrt(sq))/ (2 * a));
+            }else{
+                real  = -b/(2 * a);
+                imag = Sqrt(sq * -1)/ (2 * a);
+                solution1 = "X = " + String.valueOf(real) + " * X^0 +"+ String.valueOf(imag) + " * i";
+                solution2 = "X = " + String.valueOf(real) + " * X^0 -"+ String.valueOf(imag) + " * i";
             }
         }else if (b != 0){
-            sol1 = -1 * (c / b);
+            solution1 = String.valueOf(-1 * (c / b));
+            solution2 = "";
         }
     }
 
@@ -85,16 +94,17 @@ public class Computor {
 
     public void printSolutions(){
         System.out.println("The solutions are :");
-        if (a == 0 && b == 0 && c == 0 && sol1 == 0 && sol2 == 0)
+        if (a == 0 && b == 0 && c == 0)
             System.out.println("All real numbers");
-        if (sol1 != 0 && discriminant == true)
-            System.out.println(sol1);
-        if (sol2 != 0 && discriminant == true)
-            System.out.println(sol2);
-        if (discriminant == false)
-            System.out.println("The are no real solutions as the discriminant is negative");
+        else if (discriminant == true)
+            System.out.println("Discriminant is positive");
+        else
+            System.out.println("Discriminant is negative");
+        if (solution1.length() > 1)
+            System.out.println(solution1);
+        if (solution2.length() > 1 )
+            System.out.println(solution2);
     }
-
     public static void main(String [] args){
 
         if (args.length != 1){
