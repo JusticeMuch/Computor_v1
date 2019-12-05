@@ -14,8 +14,10 @@ public class Computor {
 
     public void getCoefficients (){
         a = b = c = 0;
+        int equateNeg = 1;
         for (int i = 0; i < sumSplit.length; i++){
             String temp = sumSplit[i];
+            equateNeg = (temp.contains("=")) ? -1 : equateNeg;
             if (temp.contains("X^")){
                 int tempCoef = Integer.parseInt(temp.replace("X^", ""));
                 hpd = hpd < tempCoef ? tempCoef: hpd;
@@ -24,8 +26,7 @@ public class Computor {
                 else if (sumSplit[i - 1].contains("*") && i != 1){
                     Float t = Float.parseFloat(sumSplit[i - 2]);
                     t = (i > 2 && sumSplit[i - 3].contains("-")) ? t * (-1) : t;
-                    t = (i > 3 && sumSplit[i - 4].contains("=")) ? t * (-1) : t;
-                    t = (i > 2 && sumSplit[i - 3].contains("=")) ? t * (-1) : t;
+                    t = t * equateNeg;
                     switch (tempCoef) {
                         case 0 :
                             c += t;
