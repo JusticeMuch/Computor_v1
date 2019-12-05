@@ -1,3 +1,4 @@
+javac Computor.java
 echo "SPECIAL : 5 * X^0 = 5 * X^0"
 java  Computor "5 * X^0 = 5 * X^0"
 echo "\n"

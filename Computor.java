@@ -48,21 +48,20 @@ public class Computor {
     public void solve(){
         float real, imag;
         real = imag = 0;
-        if (a != 0){
+        if (a != 0 ){
             float sq = (b*b) - 4*a*c;
-            System.out.println(sq);
             discriminant = (sq < 0) ? false : true;
             if (discriminant == true){
                 solution1 = "X = " + String.valueOf((-b + Sqrt(sq))/ (2 * a));
                 solution2 = "X = " + String.valueOf((-b - Sqrt(sq))/ (2 * a));
-            }else{
+            }else {
                 real  = -b/(2 * a);
                 imag = Sqrt(sq * -1)/ (2 * a);
                 solution1 = "X = " + String.valueOf(real) + " * X^0 +"+ String.valueOf(imag) + " * i";
                 solution2 = "X = " + String.valueOf(real) + " * X^0 -"+ String.valueOf(imag) + " * i";
             }
         }else if (b != 0){
-            solution1 = String.valueOf(-1 * (c / b));
+            solution1 = "X = " + String.valueOf(-1 * (c / b));
             solution2 = "";
         }
     }
@@ -94,11 +93,12 @@ public class Computor {
 
     public void printSolutions(){
         System.out.println("The solutions are :");
-        if (a == 0 && b == 0 && c == 0)
+        if (a == 0 && b == 0 && c == 0){
             System.out.println("All real numbers");
-        else if (discriminant == true)
+            System.exit(0);
+        }else if (discriminant == true)
             System.out.println("Discriminant is positive");
-        else
+        else if (a != 0 && b!= 0)
             System.out.println("Discriminant is negative");
         if (solution1.length() > 1)
             System.out.println(solution1);
